@@ -19,5 +19,7 @@ func NewUserRepo(db *gorm.DB) RepoInterface {
 }
 
 func (u Repo) Get(uid uuid.UUID) (entity.User, error) {
-	return entity.User{}, nil
+	var us entity.User
+	err := u.db.Where(`id`, uid).Find(&us).Error
+	return us, err
 }

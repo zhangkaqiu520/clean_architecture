@@ -7,7 +7,8 @@ import (
 )
 
 type RepoInterface interface {
-	Get(uuid uuid.UUID) (entity.Cat, error)
+	Get(uuid.UUID) (entity.Cat, error)
+	Create(entity.CreateCatRequest) (entity.Cat, error)
 }
 
 type Repo struct {
@@ -18,6 +19,19 @@ func NewCatRepo(db *gorm.DB) RepoInterface {
 	return Repo{db}
 }
 
-func (c Repo) Get(uid uuid.UUID) (entity.Cat, error) {
-	return entity.Cat{}, nil
+func (c Repo) Get(uid uuid.UUID) (cat entity.Cat, err error) {
+	err = c.db.Where(`id`, uid).Find(&cat).Error
+
+	return
+}
+
+func (c Repo) Create(req entity.CreateCatRequest) (entity.Cat, error) {
+	cat := entity.Cat{
+		ID:    uuid.New(),
+		Name:  req.Name,
+		Breed: req.Breed,
+	}
+	err := c.db.Create(&cat).Error
+
+	return cat, err
 }

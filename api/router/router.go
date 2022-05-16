@@ -14,5 +14,8 @@ func NewRouter(hs handler.Handlers) *gin.Engine {
 	// cat路由
 	r.GET(`/cat`, hs.Cat.GetCat)
 
+	// goods路由
+	r.GET(`/goods`, hs.Goods.GetPagination)
+
 	return r
 }
