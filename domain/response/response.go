@@ -17,6 +17,7 @@ type Pagination struct {
 	Extra   map[string]interface{} `json:"extra"`
 }
 
+// NewPagination 分页
 func NewPagination(page, perPage int, list interface{}, tx *gorm.DB) (Pagination, error) {
 	p := Pagination{
 		Page:    page,

@@ -1,0 +1,17 @@
+@domain = http://127.0.0.1:9991
+
+###
+GET {{domain}}/api/goods HTTP/1.1
+
+###
+GET {{domain}}/api/goods/e2cd3147-56f3-439f-8681-6dc4d2a98e52 HTTP/1.1
+
+
+###
+POST {{domain}}/api/goods HTTP/1.1
+Content-Type: application/json
+
+{
+    "name":"商品2"
+}
+
